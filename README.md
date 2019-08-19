@@ -1,1 +1,1 @@
-#조선대학교 CTABLE
+# 조선대학교 CTABLE
