@@ -1,0 +1,37 @@
+<chosun-header>
+    <button class="chosun-icon icon-back button-left" ng-show="data.useBack" ng-click="goBack()"></button>
+    <span>{{ data.title }}</span>
+</chosun-header>
+
+<chosun-sub-header class="center">
+    <div class="day-container">
+        <div class="col-7 center" ng-repeat="item in data.daynames" ng-click="viewDay( $index )">
+            <span class="{{ $index === data.dayOfday ? 'text-activated' : '' }}">{{ item }}</span>
+        </div>
+    </div>
+    <div class="ball-holder col-{{ data.daynames.length }}" style="transform: translateX( calc( {{ data.dayOfday * ( 100 / data.daynames.length ) + ( 100 / data.daynames.length / 2 ) }}vw - 2px ));"></div>
+</chosun-sub-header>
+
+<chosun-contents class="daytable has-header has-sub-header has-footer"
+                 ng-swipe-left="swipeDay( false )"
+                 ng-swipe-right="swipeDay( true )">
+
+    <div class="row list-area" ng-repeat="item in data.daytable" ng-show="item.curi_num !== ''">
+        <div class="hour-area">{{ data.dayOfday == 1 || data.dayOfday == 3 ? data.hourtable2[ $index ] : data.hourtable[ $index ] }}
+            <div class="prof-area">{{ item.emp_nm }} {{ item.curi_num.substring( item.curi_num.indexOf('-') +1 ) }}분반</div>
+        </div>
+        <div class="list-area-item class-number col-5 text-center">{{ $index }}<span>교시</span></div>
+        <div class="list-area-item" style="background-color: {{ item.color }}">
+            <div>{{ item.subject }}</div>
+            <div>{{ item.room_nm }}</div>
+
+            <button class="chosun-icon button-right-2"
+                    ng-show="item.curi_num !== ''" ng-click="showDetail( item )"><i class="material-icons">search</i></button>
+            <button class="chosun-icon button-right" ng-click="gotoBoard( item )"
+                    ng-show="item.curi_num !== ''"><i class="material-icons">comment</i></button>
+        </div>
+    </div>
+
+    <div class="no-table center" ng-hide="data.daytable.filter(filterCuriNum).length"><i class="material-icons">&#xE90F;</i>오늘은, 쉬는 날인가</div>
+
+</chosun-contents>

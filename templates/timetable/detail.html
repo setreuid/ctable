@@ -1,0 +1,10 @@
+<chosun-header>
+    <span>{{ data.title }}</span>
+    <button class="button-right" ng-click="gotoBottom()"><i class="material-icons">&#xE258;</i></button>
+</chosun-header>
+
+<chosun-contents class="detail has-header has-footer" scrollable>
+
+    <div class="contents" ng-bind-html="data.contents"></div>
+
+</chosun-contents>

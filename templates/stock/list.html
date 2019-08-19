@@ -1,0 +1,133 @@
+<chosun-header>
+    <button class="chosun-icon icon-back button-left" ng-show="data.useBack"></button>
+    <span>{{ data.title }}</span>
+</chosun-header>
+
+<chosun-sub-header class="center">
+    <div class="day-container">
+        <div class="col-{{ data.modeList.length }} center" ng-repeat="item in data.modeList" ng-click="viewMode( $index )">
+            <span class="{{ $index === data.mode ? 'text-activated' : '' }}">{{ item }}</span>
+        </div>
+    </div>
+    <div class="ball-holder col-{{ data.modeList.length }}" style="transform: translateX( calc( {{ data.mode * ( 100 / data.modeList.length ) + ( 100 / data.modeList.length / 2 ) }}vw - 2px ));"></div>
+</chosun-sub-header>
+
+<chosun-contents class="stock-list has-header has-sub-header has-footer">
+
+    <!-- 매입 -->
+    <div class="st-search" ng-if="data.mode < 2">
+        <i class="material-icons st-big-icon">search</i>
+        <input id="stock-search" type="text" ng-model="data.searchQuery" placeholder="종목을 검색하세요" onclick="this.select()" ng-enter="loadSources()" />
+        <i ng-show="data.searchQuery.length" class="material-icons st-small-icon" ng-click="clearSearchQuery()">close</i>
+    </div>
+
+    <div class="st-contents"
+        ng-if="data.mode < 2"
+        ng-repeat="item in data.source"
+        ng-click="gohref( 'stockbuy/' + item.code + '/0' )">
+        <div class="st-bar"
+            ng-class="{ 'bg-red' : item.updn.indexOf( '▲' ) > -1,
+                       'bg-blue' : item.updn.indexOf( '▼' ) > -1 }"></div>
+        <div class="st-title">
+            <li>{{ item.code }}</li>
+            <li>{{ item.name }}</li>
+        </div>
+        <div class="st-info">
+            <li ng-class="{ 'color-red' : item.updn.indexOf( '▲' ) > -1,
+                            'color-blue' : item.updn.indexOf( '▼' ) > -1 }">
+                {{ replaceF( item.cost ) }}
+            </li>
+            <li ng-class="{ 'color-red' : item.updn.indexOf( '▲' ) > -1,
+                            'color-blue' : item.updn.indexOf( '▼' ) > -1 }">
+                {{ replaceN( item.updn ) }}
+            </li>
+            <li ng-class="{ 'color-red' : item.updn.indexOf( '▲' ) > -1,
+                            'color-blue' : item.updn.indexOf( '▼' ) > -1 }">
+                {{ item.rate }}
+            </li>
+        </div>
+        <img class="st-mini-chart" ng-src="http://imgfinance.naver.net/chart/mobile/mini/{{ item.code }}_end_up.png?{{ data.now }}" />
+    </div>
+    <!-- /매입 -->
+
+    <!-- 매도 -->
+    <div class="st-my-info" ng-if="data.mode == 2">
+        <li><font>{{ replaceF( data.myinfo.money*1 + data.myinfo.stmoney*1 ) }}</font> 원</li>
+        <li>현금 <font>{{ replaceF( data.myinfo.money ) }}</font> 원</li>
+        <li>주식 자산 <font>{{ replaceF( data.myinfo.stmoney ) }}</font> 원</li>
+    </div>
+
+    <div class="st-contents"
+        ng-if="data.mode == 2"
+        ng-repeat="item in data.source"
+        ng-click="gohref( 'stockbuy/' + item.code + '/1' )">
+        <div class="st-bar"
+            ng-class="{ 'bg-red' : item.updn.indexOf( '▲' ) > -1,
+                       'bg-blue' : item.updn.indexOf( '▼' ) > -1 }"></div>
+        <div class="st-title">
+            <li>{{ item.code }}</li>
+            <li>{{ item.name }}</li>
+            <li class="my">{{ item.counts }}<font> 주 보유</font></li>
+        </div>
+        <div class="st-info">
+            <li ng-class="{ 'color-red' : item.updn.indexOf( '▲' ) > -1,
+                            'color-blue' : item.updn.indexOf( '▼' ) > -1 }">
+                {{ replaceF( item.cost ) }}
+            </li>
+            <li ng-class="{ 'color-red' : item.updn.indexOf( '▲' ) > -1,
+                            'color-blue' : item.updn.indexOf( '▼' ) > -1 }">
+                {{ replaceN( item.updn ) }}
+            </li>
+            <li ng-class="{ 'color-red' : item.updn.indexOf( '▲' ) > -1,
+                            'color-blue' : item.updn.indexOf( '▼' ) > -1 }">
+                {{ item.rate }}
+            </li>
+        </div>
+        <div class="st-additinal">
+            <li>지금 팔면 주당 <font ng-class="{ 'color-red' : item.subissue,
+                                            'color-blue' : !item.subissue }">{{ item.subcost }}</font>원 {{ item.subissue ? '이득' : '손해' }}</li>
+            <li>전부 팔면 <font ng-class="{ 'color-red' : item.subissue,
+                                          'color-blue' : !item.subissue }">{{ item.subcosttotal }}</font>원 {{ item.subissue ? '이득' : '손해' }}</li>
+        </div>
+        <img class="st-mini-chart" ng-src="http://imgfinance.naver.net/chart/mobile/mini/{{ item.code }}_end_up.png?{{ data.now }}" />
+    </div>
+    <!-- /매도 -->
+
+    <!-- 랭킹 -->
+    <div class="st-contents"
+        ng-if="data.mode == 3"
+        ng-repeat="item in data.source">
+        <div class="st-title">
+            <li>{{ $index +1 }}위</li>
+            <li>{{ !item.nick || item.nick == '' ? '익룡' : item.nick }}</li>
+        </div>
+        <div class="st-info">
+            <li ng-class="{ 'color-red' : $index == 0,
+                            'color-orange' : $index == 1,
+                            'color-blue' : $index == 2,
+                            'color-skyblue' : $index > 2 }">
+                {{ replaceF( item.stmoney ) }}<font class="st-short"> 원</font>
+            </li>
+        </div>
+        <img class="st-mini-badge" ng-src="images/icons/{{ item.tier }}.svg" />
+    </div>
+    <!-- /랭킹 -->
+
+    <!-- 상점 -->
+    <div class="st-contents"
+        ng-if="data.mode == 4"
+        ng-repeat="item in data.storeList"
+        ng-click="doStoreProc( item )">
+        <div class="st-title">
+            <li>{{ item.memo }}</li>
+            <li>{{ item.title }}</li>
+        </div>
+        <div class="st-info">
+            <li class="color-skyblue">
+                {{ replaceF( item.cost ) }}<font class="st-short"> 원</font>
+            </li>
+        </div>
+    </div>
+    <!-- /상점 -->
+
+</chosun-contents>

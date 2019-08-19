@@ -1,0 +1,53 @@
+<chosun-header>
+    <button class="chosun-icon icon-back button-left" ng-show="data.useBack"></button>
+    <span>{{ data.info.name }}</span>
+</chosun-header>
+
+<chosun-sub-header class="center">
+    <div class="day-container">
+        <div class="col-2 center" ng-repeat="item in data.modeList" ng-click="viewMode( $index )">
+            <span class="{{ $index === data.mode ? 'text-activated' : '' }}">{{ item }}</span>
+        </div>
+    </div>
+    <div class="ball-holder col-{{ data.modeList.length }}" style="transform: translateX( calc( {{ data.mode * ( 100 / data.modeList.length ) + ( 100 / data.modeList.length / 2 ) }}vw - 2px ));"></div>
+</chosun-sub-header>
+
+<chosun-contents class="stock-list has-header has-sub-header has-footer">
+
+    <div class="st-buy" ng-if="data.info">
+        <li><input type="number" pattern="[0-9]*" ng-model="data.counts" ng-change="countsHandle()" ng-focus="focusedCountsHandle()" placeholder="{{ data.mode == 0 ? '매수' : '매도' }}할 주식 수" />주</li>
+        <li>{{ replaceF( data.counts * data.info.cost ) }}<font>원</font></li>
+        <li ng-show="data.mode == 0">내가 가진 현금 {{ replaceF( data.info.money ) }}원</li>
+        <li>최대 {{ data.mode == 0 ? floor( data.info.money / data.info.cost ) : data.info.counts || 0 }}주 {{ data.mode == 0 ? '매수' : '매도' }} 가능</li>
+    </div>
+
+    <button class="button-full semi-full" ng-if="data.mode == 0" ng-click="commitBuy()">즉시 매수</button>
+    <button class="button-full semi-full" ng-if="data.mode == 1" ng-click="commitPay()">즉시 매도</button>
+
+    <div class="st-contents" ng-if="data.info">
+        <div class="st-bar"
+            ng-class="{ 'bg-red' : data.info.updn.indexOf( '▲' ) > -1,
+                       'bg-blue' : data.info.updn.indexOf( '▼' ) > -1 }"></div>
+        <div class="st-title">
+            <li>{{ data.info.code }}</li>
+            <li>{{ data.info.name }}</li>
+        </div>
+        <div class="st-info">
+            <li ng-class="{ 'color-red' : data.info.updn.indexOf( '▲' ) > -1,
+                            'color-blue' : data.info.updn.indexOf( '▼' ) > -1 }">
+                {{ replaceF( data.info.cost ) }}
+            </li>
+            <li ng-class="{ 'color-red' : data.info.updn.indexOf( '▲' ) > -1,
+                            'color-blue' : data.info.updn.indexOf( '▼' ) > -1 }">
+                {{ replaceN( data.info.updn ) }}
+            </li>
+            <li ng-class="{ 'color-red' : data.info.updn.indexOf( '▲' ) > -1,
+                            'color-blue' : data.info.updn.indexOf( '▼' ) > -1 }">
+                {{ data.info.rate }}
+            </li>
+        </div>
+    </div>
+
+    <img ng-if="data.info" ng-src="{{ 'http://imgfinance.naver.net/chart/mobile/candle/day/' + data.info.code + '_end.png' }}" width="100%" />
+
+</chosun-contents>

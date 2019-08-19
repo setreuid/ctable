@@ -1,0 +1,32 @@
+<chosun-header>
+    <button class="chosun-icon icon-back button-left" ng-click="goBack()"></button>
+    <span>{{ data.title }}</span>
+</chosun-header>
+
+<chosun-contents class="stock-list has-header has-footer">
+
+    <div class="game-chart-container">
+        <div class="ct-chart"></div>
+        <div class="ct-size" ng-class="{ 'just-text' : data.state == 0, 'animate-text' : data.state == 2 }">{{ sizeStr() }}</div>
+    </div>
+
+    <div class="st-buy" ng-if="data.info">
+        <li><input type="number" pattern="[0-9]*" ng-model="data.bet" ng-change="countsHandle()" ng-focus="focusedCountsHandle()" placeholder="배팅 금액" />원 배팅</li>
+        <li>배팅금 {{ replaceF( data.betted * data.size ) }}<font>원</font></li>
+        <li>내가 가진 현금 {{ replaceF( data.info.money ) }}원</li>
+    </div>
+
+    <button class="button-full semi-full" ng-if="data.state == 0" ng-click="doBet()">배팅</button>
+    <button class="button-full semi-full" ng-if="data.state == 1" ng-click="doCommit()">출금</button>
+
+    <div class="content-memo">
+        1. 대기시간(5초~6초)동안 베팅(최대 30만원)합니다.<BR>
+        2. 게임이 종료되기 전에 [출금]하면 승리.<BR>
+        3. 출금하지 않고 게임이 종료되면 돈을 잃습니다.<BR>
+        <BR>
+        * 도박은 패가망신의 지름길입니다.
+        <BR>
+        * 밸런스 조정에 도움주신 <font style="color: rgb(0, 112, 255)">손성호</font>님 감사합니다.
+    </div>
+
+</chosun-contents>

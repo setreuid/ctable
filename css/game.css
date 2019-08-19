@@ -1,0 +1,58 @@
+.game-chart-container {
+    display: block;
+    position: relative;
+    border-bottom: solid 1px rgb(237, 237, 237);
+    background-color: rgb(255, 248, 239);
+}
+
+.ct-size {
+    display: block;
+    position: absolute;
+    bottom: 50px;
+    text-align: center;
+    width: 100%;
+    font-size: 36px;
+    color: #ffffff;
+    text-shadow: 0 0 10px rgb(255, 0, 0);
+}
+
+.just-text {
+    font-size: 16px;
+    color: #616161;
+    text-shadow: 0 0 5px rgba(121, 121, 121, 0.1);
+}
+
+.animate-text {
+    text-shadow: 0 0 5px rgba(121, 121, 121, 0.1);
+    -webkit-animation: colorchange 5s infinite alternate;
+}
+
+@-webkit-keyframes colorchange {
+    0% {
+        color: white;
+    }
+
+    25% {
+        color: #78ff6f;
+    }
+
+    50% {
+        color: #ffee9c;
+    }
+
+    75% {
+        color: pink;
+    }
+
+    100% {
+        color: red;
+    }
+}
+
+.content-memo {
+    font-size: 12px;
+    position: fixed;
+    bottom: 75px;
+    left: 20px;
+    color: #6d6d6d;
+}

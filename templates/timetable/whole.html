@@ -1,0 +1,62 @@
+<chosun-header>
+    <button class="chosun-icon icon-back button-left" ng-show="data.useBack"></button>
+    <span>주간 시간표</span>
+</chosun-header>
+
+<chosun-contents class="timetable has-header has-footer" scrollable>
+
+    <div class="row day-item border-top">
+        <div class="col-{{ data.dayCount+1 }}">　</div>
+        <div class="col-{{ data.dayCount+1 }}"
+             ng-repeat="dayname in data.dayNames"
+             ng-hide="$index % 7 === 0 && !config.useMon || $index % 7 === 1 && !config.useTue || $index % 7 === 2 && !config.useWed || $index % 7 === 3 && !config.useThu || $index % 7 === 4 && !config.useFri || $index % 7 === 5 && !config.useThr || $index % 7 === 6 && !config.useSat">
+             {{ dayname }}</div>
+         </div>
+
+    <div ng-hide="config.showOneSee"
+         class="row day-item table-area"
+         ng-repeat="dayArray in data.timetable">
+        <div class="col-{{ data.dayCount+1 }}" style="height: {{ config.height }}vh;">
+            <span class="visible-class" ng-show="config.showVisibleTime">{{ getClassTime( data.visibleTimes[ $index ], $index ) }}<font>교시</font></span>
+            {{ data.visibleTimes[ $index ] }}
+        </div>
+        <div class="col-{{ data.dayCount+1 }}"
+             style="background-color: {{ item.color }}; height: {{ config.height }}vh;"
+             ng-hide="$index % 7 === 0 && !config.useMon || $index % 7 === 1 && !config.useTue || $index % 7 === 2 && !config.useWed || $index % 7 === 3 && !config.useThu || $index % 7 === 4 && !config.useFri || $index % 7 === 5 && !config.useThr || $index % 7 === 6 && !config.useSat"
+             ng-repeat="item in dayArray" ng-click="showDetail( item )">
+             {{ item.repeat || item.isBig ? '' : item.shortname }}
+             <div class="day-hover{{ config.showLongRoom ? ' padding-2' : '' }}"
+                  style="background-color: {{ item.color }}; height: calc( {{ config.height }}vh * {{ item.repeat + 1 }} );"
+                  ng-show="item.repeat" ng-click="showDetail( item )">
+                 <span>{{ config.showLongRoom ? item.subject.substring( 0, 6 ) : item.subject }}</span>
+                 <span class="area" ng-show="config.viewArea && item.repeat > 1">{{ item.emp_nm }}</span>
+                 <span class="area" ng-show="config.viewArea && !config.showLongRoom && item.room">({{ item.room[0] }})</span>
+                 <span class="area" ng-show="config.viewArea && config.showLongRoom && item.room">({{ item.room_nm }})</span>
+             </div>
+        </div>
+    </div>
+
+    <div ng-show="config.showOneSee"
+         class="row day-item table-area show-one-see"
+         ng-repeat="dayArray in data.timetable">
+        <div class="col-{{ data.dayCount+1 }}" style="height: calc( {{ data.styleHeight }} );">
+            <span class="visible-class" ng-show="config.showVisibleTime">{{ getClassTime( data.visibleTimes[ $index ], $index ) }}<font>'</font></span>
+            {{ data.visibleTimes[ $index ] }}
+        </div>
+        <div class="col-{{ data.dayCount+1 }}"
+             style="background-color: {{ item.color }}; height: calc( {{ data.styleHeight }} );"
+             ng-hide="$index % 7 === 0 && !config.useMon || $index % 7 === 1 && !config.useTue || $index % 7 === 2 && !config.useWed || $index % 7 === 3 && !config.useThu || $index % 7 === 4 && !config.useFri || $index % 7 === 5 && !config.useThr || $index % 7 === 6 && !config.useSat"
+             ng-repeat="item in dayArray" ng-click="showDetail( item )">
+             {{ item.repeat || item.isBig ? '' : item.shortname.substring( 0, 2 ) }}
+             <div class="day-hover{{ config.showLongRoom ? ' padding-2' : '' }}"
+                  style="background-color: {{ item.color }}; height: calc(( {{ data.styleHeight }} ) * {{ item.repeat + 1 }});"
+                  ng-show="item.repeat" ng-click="showDetail( item )">
+                 <span>{{ config.showLongRoom ? item.subject.substring( 0, 6 ) : item.subject.substring( 0, 8 ) }}</span>
+                 <span class="area" ng-show="config.viewArea && item.repeat > 1">{{ item.emp_nm }}</span>
+                 <span class="area" ng-show="config.viewArea && !config.showLongRoom && item.room">({{ item.room[0] }})</span>
+                 <span class="area" ng-show="config.viewArea && config.showLongRoom && item.room">({{ item.room_nm }})</span>
+             </div>
+        </div>
+    </div>
+
+</chosun-contents>

@@ -1,0 +1,90 @@
+<chosun-header>
+    <button class="chosun-icon icon-back button-left" ng-show="data.board_idx != 0" ng-click="goBack()"></button>
+    <span>{{ data.title }}</span>
+    <button class="button-right" style="top: 0; overflow: hidden">
+        <i class="material-icons" style="top: 11px; left: 9px; position: absolute">&#xE439;</i>
+        <input ng-model="imageUpload"
+               onchange="angular.element(this).scope().prepareUpload(this)"
+               id="imageUpload"
+               type="file"
+               accept="image/*"
+               capture /></button>
+
+    <!-- ng-show="getCurrentAccount().uid === '20114764'" -->
+    <!-- <div class="button btn-upload col-10">
+         <label for="imageUpload"><i class="material-icons">&#xE439;</i></label>
+         <input ng-model="imageUpload"
+                onchange="angular.element(this).scope().prepareUpload(this)"
+                id="imageUpload"
+                type="file"
+                accept="image/*"
+                capture="camera" />
+    </div> -->
+</chosun-header>
+
+<div class="board-online-bg" ng-class="{ 'bird' : config.hour < 21, 'chik' : config.hour > 20 }"></div>
+<div class="board-online"><font>{{ data.online }}</font>명 접속중</div>
+
+<chosun-contents class="board has-header has-footer bg-light-gray">
+
+    <!-- <button class="chosun-icon icon-back button-left" ng-show="data.board_idx === '0'" ng-click="goBack()"></button> -->
+    <div id="cbcplayer" ng-show="data.enablePlayer"></div>
+    <!-- msd-elastic -->
+    <div class="board-input-container{{ data.enablePlayer ? ' isShowPlayer' : '' }}">
+        <textarea type="text"
+                  ng-model="data.contents"
+                  msd-elastic
+                  id="text-input-1"
+                  ng-click="textInputFocus()"
+                  placeholder="아무 말이나 적어보세여">
+        </textarea>
+        <button ng-click="confirmDocument()"><i class="material-icons">done</i></button>
+    </div>
+
+    <div class="documents">
+
+        <div class="document-container{{ item.perid }}"
+             ng-class="{ 'document-only-image' : item.perid == ' root' && (item.image || item.iframe) }"
+             ng-repeat="item in data.documents"
+             ng-swipe-left="removeMessage( item, $index )">
+            <div class="document-icon-container">
+                <img class="badge" ng-src="images/icons/{{ item.tier }}.svg" />
+            </div>
+            <div class="badge-content">
+                <span class="document-pernm">
+                    {{ !item.nick || item.nick == '' ? '익룡' : item.nick }}
+                </span>
+                <span ng-show="item.perid == ' my'" class="remove" ng-click="removeMessage( item, $index )">
+                    삭제
+                </span>
+            </div>
+            <span class="info" ng-if="item.perid == ' my'">
+                {{ transferTime( item.inputdate ) }}
+            </span>
+            <div class="document-content-container" ng-click="item.open = !item.open" ng-class="{ 'semi-blocked' : (item.bad * -1 + item.good*1) < 0 && !item.open, 'blocked' : (item.bad * -1 + item.good*1) < -9 && !item.open }">
+                <span ng-hide="item.image || item.iframe" class="document-content opened" ng-bind-html="getContent(item)"></span>
+                <span ng-show="item.image" ng-click="popimage(item.image)" class="document-image" back-img="http://api.udp.cc/libs/image.php?idx={{ item.image }}"></span>
+            </div>
+            <span class="info" ng-if="item.perid == ''">
+                <div class="info-like-buttons">
+                    <span>{{ item.good }}<i class="material-icons" ng-class="{ 'active' : item.islike == 1 }">thumb_up_alt</i></span>&nbsp;
+                    <span>{{ item.bad }}<i class="material-icons" ng-class="{ 'active' : item.islike == 2 }" style="color: #F64162">thumb_down_alt</i></span>
+                </div>
+                {{ transferTime( item.inputdate ) }}
+            </span>
+            <div class="document-footer-bar">
+                <span>좋아요 <font>{{ item.good }}</font></span>
+                <span>싫어요 <font>{{ item.bad }}</font></span>
+            </div>
+            <!-- ng-if="item.open" -->
+            <div class="document-footer-buttons" ng-show="item.open && item.perid == ''" style="{{ item.perid == ' my' ? 'margin-right: 12px' : '' }}">
+                <button ng-class="{ 'active' : item.islike == 1 }" ng-click="good(item, $index)"><i class="material-icons" ng-class="{ 'active' : item.islike == 1 }">thumb_up_alt</i></button>
+                <button ng-class="{ 'active' : item.islike == 2 }" ng-click="bad(item, $index)"><i class="material-icons" ng-class="{ 'active' : item.islike == 1 }" style="color: #F64162">thumb_down_alt</i></button>
+            </div>
+        </div>
+
+        <button class="button-full" ng-click="loadData()" ng-hide="data.page < 0">더보기</button>
+
+    </div>
+
+</chosun-contents>

@@ -1,0 +1,210 @@
+<chosun-header>
+    <button class="chosun-icon icon-back button-left" ng-show="data.useBack"></button>
+    <span>설정</span>
+</chosun-header>
+
+<chosun-contents class="settings has-header has-footer">
+
+    <div class="hr"></div>
+
+    <div class="container">
+
+        <div class="item">
+            1학기
+            <label class="switch right" ng-click="setClass('10')">
+                <input type="checkbox" ng-model="data.class10">
+                <div class="slider round"></div>
+            </label>
+        </div>
+
+        <div class="item">
+            하계 계절학기
+            <label class="switch right" ng-click="setClass('11')">
+                <input type="checkbox" ng-model="data.class11">
+                <div class="slider round"></div>
+            </label>
+        </div>
+
+        <div class="item">
+            2학기
+            <label class="switch right" ng-click="setClass('20')">
+                <input type="checkbox" ng-model="data.class20">
+                <div class="slider round"></div>
+            </label>
+        </div>
+
+        <div class="item">
+            동계 계절학기
+            <label class="switch right" ng-click="setClass('21')">
+                <input type="checkbox" ng-model="data.class21">
+                <div class="slider round"></div>
+            </label>
+        </div>
+
+    </div>
+
+    <div class="hr"></div>
+
+    <div class="container">
+
+        <div class="item" ng-click="reloadTimeTable()">
+            최신 시간표 갱신
+        </div>
+
+    </div>
+
+    <div class="hr long-comment"><font>화요일, 목요일의 75분 수업을 적용하여 시간표를 보여드립니다.</font><BR>독촉해주신 분들, Yeon Su Kim, 박하나, wdv5678, pizza0196, 신봉수, tang3332, tmd5165, 노소연, 조완호, 나은지, 장경원</div>
+
+    <div class="container">
+
+        <div class="item">
+            화,목 적용 주간시간표 적용
+            <label class="switch right" ng-click="toggleUseNew01()">
+                <input type="checkbox" ng-model="config.usenew01">
+                <div class="slider round"></div>
+            </label>
+        </div>
+
+    </div>
+
+    <div class="hr"></div>
+
+    <div class="container">
+
+        <div class="item">
+            월요일 보여드림
+            <label class="switch right" ng-click="saveConfigFor( 2 )">
+                <input type="checkbox" ng-model="config.useMon">
+                <div class="slider round"></div>
+            </label>
+        </div>
+
+        <div class="item">
+            화요일 보여드림
+            <label class="switch right" ng-click="saveConfigFor( 3 )">
+                <input type="checkbox" ng-model="config.useTue">
+                <div class="slider round"></div>
+            </label>
+        </div>
+
+        <div class="item">
+            수요일 보여드림
+            <label class="switch right" ng-click="saveConfigFor( 4 )">
+                <input type="checkbox" ng-model="config.useWed">
+                <div class="slider round"></div>
+            </label>
+        </div>
+
+        <div class="item">
+            목요일 보여드림
+            <label class="switch right" ng-click="saveConfigFor( 5 )">
+                <input type="checkbox" ng-model="config.useThu">
+                <div class="slider round"></div>
+            </label>
+        </div>
+
+        <div class="item">
+            금요일 보여드림
+            <label class="switch right" ng-click="saveConfigFor( 6 )">
+                <input type="checkbox" ng-model="config.useFri">
+                <div class="slider round"></div>
+            </label>
+        </div>
+
+        <div class="item">
+            토요일 보여드림
+            <label class="switch right" ng-click="saveConfigFor( 0 )">
+                <input type="checkbox" ng-model="config.useThr">
+                <div class="slider round"></div>
+            </label>
+        </div>
+
+        <div class="item">
+            일요일 보여드림
+            <label class="switch right" ng-click="saveConfigFor( 1 )">
+                <input type="checkbox" ng-model="config.useSat">
+                <div class="slider round"></div>
+            </label>
+        </div>
+
+        <div class="item">
+            추가정보 보여드림
+            <label class="switch right" ng-click="toggleConfigArea()">
+                <input type="checkbox" ng-model="config.viewArea">
+                <div class="slider round"></div>
+            </label>
+        </div>
+
+        <div class="item">
+            강의실 길게 보여드려여?
+            <label class="switch right" ng-click="toggleLongRoom()">
+                <input type="checkbox" ng-model="config.showLongRoom">
+                <div class="slider round"></div>
+            </label>
+        </div>
+
+    </div>
+
+    <div class="hr comment"><font>유광현</font>님의 아이디어</div>
+
+    <div class="container">
+
+        <div class="item">
+            몇교신지 보여드림
+            <label class="switch right" ng-click="toggleVisibleTime()">
+                <input type="checkbox" ng-model="config.showVisibleTime">
+                <div class="slider round"></div>
+            </label>
+        </div>
+
+    </div>
+
+    <div class="hr comment"><font>김혜은</font>님의 아이디어</div>
+
+    <div class="container">
+
+        <div class="item">
+            한눈에 보여드림
+            <label class="switch right" ng-click="toggleOneSee()">
+                <input type="checkbox" ng-model="config.showOneSee">
+                <div class="slider round"></div>
+            </label>
+        </div>
+
+    </div>
+
+<div class="hr comment">배고플때 큰 도움 주신 <font>권순필</font>, <font>이건수</font>, <font>공선우</font>, <font>이가현</font>, <font>김형우</font> 님 감사합니다...</div>
+
+    <div class="container">
+
+        <div class="item" ng-click="doAlert( '농협 246-12-094127 조태호' )">
+            후원하기
+        </div>
+
+    </div>
+
+    <div class="hr"></div>
+
+    <div class="container">
+
+        <div class="item" ng-click="doAlert( config.version + ' 카톡(setreuid)' )">
+            버전 <span class="highlight">{{ config.version }}</span>
+        </div>
+
+        <a class="item" href="mailto:setreuid@naver.com?Subject=CTable%20건의입니다">
+            메일로 건의하기
+        </a>
+
+        <div class="item" ng-click="doAlert( 'dest.kr' )">
+            개발자 블로그
+        </div>
+
+        <div class="item" ng-click="logoutCurrentAccount()">
+            로그아웃
+        </div>
+
+    </div>
+
+    <div class="hr"></div>
+
+</chosun-contents>

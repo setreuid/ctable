@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 15.0.2, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="레이어_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
+	 y="0px" width="700px" height="700px" viewBox="0 0 700 700" enable-background="new 0 0 700 700" xml:space="preserve">
+<g>
+	<circle fill="#F2BB20" cx="350.383" cy="350.019" r="329.252"/>
+	<circle fill="#23A7B5" cx="350.383" cy="350.019" r="304.033"/>
+	<g>
+		<g>
+			<polygon fill-rule="evenodd" clip-rule="evenodd" fill="#F2BB20" points="350.381,93.403 433.236,242.054 596.506,271.3 
+				481.973,395.582 501.467,561.295 350.381,490.623 199.295,561.295 218.791,393.146 104.26,271.3 269.965,239.618 			"/>
+			<g>
+				<polygon fill-rule="evenodd" clip-rule="evenodd" fill="#F09320" points="104.26,271.3 350.381,351.718 269.965,239.618 				"/>
+				<polygon fill-rule="evenodd" clip-rule="evenodd" fill="#F09320" points="350.381,93.403 350.381,351.718 433.236,242.054 				
+					"/>
+				<polygon fill-rule="evenodd" clip-rule="evenodd" fill="#F09320" points="596.506,271.3 350.381,351.718 481.973,395.582 				
+					"/>
+				<polygon fill-rule="evenodd" clip-rule="evenodd" fill="#F09320" points="350.381,490.623 501.467,561.295 350.381,351.718 				
+					"/>
+				<polygon fill-rule="evenodd" clip-rule="evenodd" fill="#F09320" points="199.295,561.295 350.381,351.718 218.791,393.146 				
+					"/>
+			</g>
+			<g>
+				<polygon fill-rule="evenodd" clip-rule="evenodd" fill="#F6C650" points="304.082,178.695 338.197,139.705 350.381,351.718 
+					350.381,93.403 				"/>
+				<polygon fill-rule="evenodd" clip-rule="evenodd" fill="#F6C650" points="172.49,344.406 145.686,298.104 350.381,351.718 
+					104.26,271.3 				"/>
+				<polygon fill-rule="evenodd" clip-rule="evenodd" fill="#F6C650" points="287.021,519.866 235.85,532.05 350.381,351.718 
+					199.295,561.295 				"/>
+				<polygon fill-rule="evenodd" clip-rule="evenodd" fill="#F6C650" points="484.408,517.43 350.381,351.718 501.467,561.295 
+					489.283,463.818 				"/>
+				<polygon fill-rule="evenodd" clip-rule="evenodd" fill="#F6C650" points="499.031,254.241 550.203,276.173 350.381,351.718 
+					596.506,271.3 				"/>
+			</g>
+		</g>
+	</g>
+</g>
+</svg>

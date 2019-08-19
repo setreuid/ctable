@@ -1,0 +1,20 @@
+<chosun-header>
+    <button class="chosun-icon icon-back button-left" ng-show="data.useBack"></button>
+    <span>학사 일정</span>
+</chosun-header>
+
+<chosun-contents class="daytable has-header has-footer">
+
+    <div class="event" ng-repeat="item in data.caltable">
+        <div class="hr" ng-show="item.newline"></div>
+        <div id="c{{ item.stdate.substring( 0, item.stdate.lastIndexOf('.') ) }}" class="row list-area">
+            <div class="hour-area">{{ item.stdate }}</div>
+            <div class="list-area-item class-number col-5 text-center">{{ item.stdate.substring( item.stdate.indexOf('.')+1, item.stdate.indexOf('.', item.stdate.indexOf('.')+1) ) }}<span>월</span></div>
+            <div class="list-area-item">
+                <div>{{ item.name }}</div>
+                <div>{{ item.stdate }} ~ {{ item.eddate }}</div>
+            </div>
+        </div>
+    </div>
+
+</chosun-contents>

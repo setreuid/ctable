@@ -1,0 +1,22 @@
+<div class="login-container" ng-show="data.login">
+<form>
+
+    <div class="title"></div>
+
+    <div class="input row">
+        <span class="col-4">학번</span>
+        <input class="col-75" type="text" autocomplete="current-username" ng-model="config.account.uid" />
+    </div>
+
+    <div class="input row">
+        <span class="col-4">패스워드</span>
+        <input class="col-75" type="password" autocomplete="current-password" ng-model="config.account.upw" />
+    </div>
+
+    <button class="button-full" ng-click="doLogin()">로그인</button>
+
+    <span class="copyright">
+        조대컴공 11학번 조태호 개발
+    </span>
+</form>
+</div>
